@@ -7,7 +7,7 @@ router.post('/inputdata', (req, res) => {
     const data = req.body
 
     conn.query(sql, data, (err, result2) => {
-        if(err) return res.send(err)
+        if(err) return res.send("error")
         res.send("Data telah berhasil dibuat")
     })
 })
@@ -17,7 +17,7 @@ router.get('/manage', (req, res) => {
     const sql = `SELECT * FROM truck`
 
     conn.query(sql, (err, result) => {
-        if(err) return res.send(err)    
+        if(err) return res.send("error")    
 
         res.send(result)
     })
@@ -28,7 +28,7 @@ router.get('/manage/:id', (req, res) => {
     const data = req.params.id
 
     conn.query(sql, data, (err, result) => {
-        if(err) return res.send(err)    
+        if(err) return res.send("error")    
 
         res.send(result)
     })
@@ -42,7 +42,7 @@ router.get('/searchdata', (req, res) => {
 
     conn.query(sql, data, (err, result) => {
         // Jika ada error dalam menjalankan query, akan dikirim errornya
-        if(err) return res.send(err)
+        if(err) return res.send("error")
 
         res.send(result[0])
     })
@@ -55,7 +55,7 @@ router.patch('/manage/:id', (req, res) => {
     const data = req.body
     
     conn.query(sql, data,  (err, result) => {
-        if(err) return res.send(err)
+        if(err) return res.send("error")
 
         res.send("Data berhasil dirubah")
     })
@@ -67,7 +67,7 @@ router.delete('/manage/:id', (req, res) => {
     const data = req.params.id
 
     conn.query(sql, data,  (err, result) => {
-        if(err) return res.send(err)
+        if(err) return res.send("error")
 
         res.send(result)
     })
