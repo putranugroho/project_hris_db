@@ -74,7 +74,7 @@ router.get('/rooms', (req,res)=>{
 })
 
 router.post('/booking', (req,res)=>{
-    const sql_reservation = `INSERT INTO tb_reservation(reservation_id, pic, jabatan, agenda, addon, user_booking, stsrec) VALUES (?,?,?,?,?,?,0)`
+    const sql_reservation = `INSERT INTO tb_reservation(reservation_id, pic, jabatan, agenda, time, addon, user_booking, stsrec) VALUES (?,?,?,?,?,?,?,0)`
     const sql_participant = `INSERT INTO tb_participant(nik, reservation_id, nama, hp, email, reminder, status) VALUES (?,?,?,?,?,?,0)`
     const sql_time_slot = `INSERT INTO tb_time_slot_detail(room_id, time_slot_id, reservation_id, date) VALUES (?,?,?,?)`
     const count = `SELECT COUNT(*) AS 'count' FROM tb_reservation`
@@ -103,7 +103,7 @@ router.post('/booking', (req,res)=>{
                 result_count = `0${result_count}`
             }
             let reservation_id = `${date}${result_count}`
-            conn.query(sql_reservation, [reservation_id,data.detail_booking.pic,detail_booking.jabatan,data.detail_booking.agenda,addon,user_booking],(err, result_reservation) => {
+            conn.query(sql_reservation, [reservation_id,data.detail_booking.pic,detail_booking.jabatan,data.detail_booking.agenda,detail_booking.time,addon,user_booking],(err, result_reservation) => {
                 if (err) {
                     return res.send("error")
                 } else {
